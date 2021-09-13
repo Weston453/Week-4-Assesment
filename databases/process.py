@@ -6,8 +6,8 @@ def sales_reports(log_file):
 # this line creates a function called sales_reports and calls the data file variable
     for line in log_file:
     # this line sets up a loop to go through each line of the data in the log_file variable
-        line = line.rstrip('\n').split(",")
-        # this line removes the unessisary line ending syntax from the data
+        line = line.rstrip()
+        # this line removes the unessisary white spaces from our lines
         day = line[0:3]
         # this line creates a variable day and indexes its location in the line 
         if day == "Mon":
@@ -18,3 +18,6 @@ def sales_reports(log_file):
 
 sales_reports(log_file)
 # this line runs the function 
+
+log_file.close()
+# this line closes the data when we are finished manipulating it 

@@ -32,16 +32,21 @@ from employee
 where city = 'Calgary';
 
 select * from employee
-where reports_to = '2';
+where reports_to in (
+    select employee_id 
+    from employee
+    where first_name = 'Nancy'
+);
 
--- not sure how to specifically select 'Lethbridge'
 select city, count(*)
 from employee
+where city = 'Lethbridge'
 group by city;
 
 -- Invoice table
 select billing_country, count(*) as order_total
 from invoice
+where billing_country = 'USA'
 group by billing_country;
 
 select max(total)
@@ -61,8 +66,9 @@ select sum(total) as total_sum
 from invoice;
 
 -- Join Queries
-select * from invoice_line
-where invoice_line.unit_price > '0.99';
+select * from invoice 
+join invoice_line on invoice.invoice_id = invoice_line.invoice_id
+where invoice_line.unit_price > 0.99;
 
 select invoice.invoice_date, customer.first_name, customer.last_name, invoice.total
 from invoice 
